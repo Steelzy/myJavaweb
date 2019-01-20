@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsVoteMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsVote" >
+    <constructor >
+      <idArg column="vote_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vote_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vote_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vote_state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vote_start" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="vote_end" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vote_id, vote_title, vote_description, vote_state, vote_start, vote_end
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_vote
+    where vote_id = #{voteId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_vote
+    where vote_id = #{voteId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsVote" >
+    insert into cms_vote (vote_id, vote_title, vote_description, 
+      vote_state, vote_start, vote_end
+      )
+    values (#{voteId,jdbcType=INTEGER}, #{voteTitle,jdbcType=VARCHAR}, #{voteDescription,jdbcType=VARCHAR}, 
+      #{voteState,jdbcType=INTEGER}, #{voteStart,jdbcType=TIMESTAMP}, #{voteEnd,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsVote" >
+    insert into cms_vote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="voteId != null" >
+        vote_id,
+      </if>
+      <if test="voteTitle != null" >
+        vote_title,
+      </if>
+      <if test="voteDescription != null" >
+        vote_description,
+      </if>
+      <if test="voteState != null" >
+        vote_state,
+      </if>
+      <if test="voteStart != null" >
+        vote_start,
+      </if>
+      <if test="voteEnd != null" >
+        vote_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="voteId != null" >
+        #{voteId,jdbcType=INTEGER},
+      </if>
+      <if test="voteTitle != null" >
+        #{voteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="voteDescription != null" >
+        #{voteDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="voteState != null" >
+        #{voteState,jdbcType=INTEGER},
+      </if>
+      <if test="voteStart != null" >
+        #{voteStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voteEnd != null" >
+        #{voteEnd,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsVote" >
+    update cms_vote
+    <set >
+      <if test="voteTitle != null" >
+        vote_title = #{voteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="voteDescription != null" >
+        vote_description = #{voteDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="voteState != null" >
+        vote_state = #{voteState,jdbcType=INTEGER},
+      </if>
+      <if test="voteStart != null" >
+        vote_start = #{voteStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voteEnd != null" >
+        vote_end = #{voteEnd,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vote_id = #{voteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsVote" >
+    update cms_vote
+    set vote_title = #{voteTitle,jdbcType=VARCHAR},
+      vote_description = #{voteDescription,jdbcType=VARCHAR},
+      vote_state = #{voteState,jdbcType=INTEGER},
+      vote_start = #{voteStart,jdbcType=TIMESTAMP},
+      vote_end = #{voteEnd,jdbcType=TIMESTAMP}
+    where vote_id = #{voteId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsDownloadMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsDownload" >
+    <constructor >
+      <idArg column="file_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="file_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_publish_user" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="download_times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="upload_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="file_get_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="file_remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    file_id, file_name, file_info, file_publish_user, file_url, download_times, upload_time, 
+    file_get_password, file_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_download
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_download
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsDownload" >
+    insert into cms_download (file_id, file_name, file_info, 
+      file_publish_user, file_url, download_times, 
+      upload_time, file_get_password, file_remark
+      )
+    values (#{fileId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{fileInfo,jdbcType=VARCHAR}, 
+      #{filePublishUser,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{downloadTimes,jdbcType=INTEGER}, 
+      #{uploadTime,jdbcType=DATE}, #{fileGetPassword,jdbcType=VARCHAR}, #{fileRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsDownload" >
+    insert into cms_download
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="fileInfo != null" >
+        file_info,
+      </if>
+      <if test="filePublishUser != null" >
+        file_publish_user,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="downloadTimes != null" >
+        download_times,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="fileGetPassword != null" >
+        file_get_password,
+      </if>
+      <if test="fileRemark != null" >
+        file_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileId != null" >
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileInfo != null" >
+        #{fileInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="filePublishUser != null" >
+        #{filePublishUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadTimes != null" >
+        #{downloadTimes,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=DATE},
+      </if>
+      <if test="fileGetPassword != null" >
+        #{fileGetPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fileRemark != null" >
+        #{fileRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsDownload" >
+    update cms_download
+    <set >
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileInfo != null" >
+        file_info = #{fileInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="filePublishUser != null" >
+        file_publish_user = #{filePublishUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadTimes != null" >
+        download_times = #{downloadTimes,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=DATE},
+      </if>
+      <if test="fileGetPassword != null" >
+        file_get_password = #{fileGetPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fileRemark != null" >
+        file_remark = #{fileRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsDownload" >
+    update cms_download
+    set file_name = #{fileName,jdbcType=VARCHAR},
+      file_info = #{fileInfo,jdbcType=VARCHAR},
+      file_publish_user = #{filePublishUser,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR},
+      download_times = #{downloadTimes,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=DATE},
+      file_get_password = #{fileGetPassword,jdbcType=VARCHAR},
+      file_remark = #{fileRemark,jdbcType=VARCHAR}
+    where file_id = #{fileId,jdbcType=INTEGER}
+  </update>
+</mapper>

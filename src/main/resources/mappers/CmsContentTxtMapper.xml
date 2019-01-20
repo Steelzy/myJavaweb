@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsContentTxtMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsContentTxt" >
+    <constructor >
+      <idArg column="content_txt_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.springboot.cms.entity.CmsContentTxt" >
+    <constructor >
+      <idArg column="content_txt_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="txt" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    content_txt_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    txt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cms_content_txt
+    where content_txt_id = #{contentTxtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_content_txt
+    where content_txt_id = #{contentTxtId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsContentTxt" >
+    insert into cms_content_txt (content_txt_id, txt)
+    values (#{contentTxtId,jdbcType=INTEGER}, #{txt,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsContentTxt" >
+    insert into cms_content_txt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contentTxtId != null" >
+        content_txt_id,
+      </if>
+      <if test="txt != null" >
+        txt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contentTxtId != null" >
+        #{contentTxtId,jdbcType=INTEGER},
+      </if>
+      <if test="txt != null" >
+        #{txt,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsContentTxt" >
+    update cms_content_txt
+    <set >
+      <if test="txt != null" >
+        txt = #{txt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where content_txt_id = #{contentTxtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.springboot.cms.entity.CmsContentTxt" >
+    update cms_content_txt
+    set txt = #{txt,jdbcType=LONGVARCHAR}
+    where content_txt_id = #{contentTxtId,jdbcType=INTEGER}
+  </update>
+</mapper>

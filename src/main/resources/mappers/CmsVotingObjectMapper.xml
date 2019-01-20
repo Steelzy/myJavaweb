@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsVotingObjectMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsVotingObject" >
+    <constructor >
+      <idArg column="person_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="vote_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="voting_counts" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="voting_sex" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="voting_pic" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="voting_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="person_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="person_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    person_id, vote_id, voting_counts, voting_sex, voting_pic, voting_time, person_name, 
+    person_description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_voting_object
+    where person_id = #{personId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_voting_object
+    where person_id = #{personId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsVotingObject" >
+    insert into cms_voting_object (person_id, vote_id, voting_counts, 
+      voting_sex, voting_pic, voting_time, 
+      person_name, person_description)
+    values (#{personId,jdbcType=INTEGER}, #{voteId,jdbcType=INTEGER}, #{votingCounts,jdbcType=INTEGER}, 
+      #{votingSex,jdbcType=INTEGER}, #{votingPic,jdbcType=VARCHAR}, #{votingTime,jdbcType=TIMESTAMP}, 
+      #{personName,jdbcType=VARCHAR}, #{personDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsVotingObject" >
+    insert into cms_voting_object
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="personId != null" >
+        person_id,
+      </if>
+      <if test="voteId != null" >
+        vote_id,
+      </if>
+      <if test="votingCounts != null" >
+        voting_counts,
+      </if>
+      <if test="votingSex != null" >
+        voting_sex,
+      </if>
+      <if test="votingPic != null" >
+        voting_pic,
+      </if>
+      <if test="votingTime != null" >
+        voting_time,
+      </if>
+      <if test="personName != null" >
+        person_name,
+      </if>
+      <if test="personDescription != null" >
+        person_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="personId != null" >
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="voteId != null" >
+        #{voteId,jdbcType=INTEGER},
+      </if>
+      <if test="votingCounts != null" >
+        #{votingCounts,jdbcType=INTEGER},
+      </if>
+      <if test="votingSex != null" >
+        #{votingSex,jdbcType=INTEGER},
+      </if>
+      <if test="votingPic != null" >
+        #{votingPic,jdbcType=VARCHAR},
+      </if>
+      <if test="votingTime != null" >
+        #{votingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personName != null" >
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="personDescription != null" >
+        #{personDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsVotingObject" >
+    update cms_voting_object
+    <set >
+      <if test="voteId != null" >
+        vote_id = #{voteId,jdbcType=INTEGER},
+      </if>
+      <if test="votingCounts != null" >
+        voting_counts = #{votingCounts,jdbcType=INTEGER},
+      </if>
+      <if test="votingSex != null" >
+        voting_sex = #{votingSex,jdbcType=INTEGER},
+      </if>
+      <if test="votingPic != null" >
+        voting_pic = #{votingPic,jdbcType=VARCHAR},
+      </if>
+      <if test="votingTime != null" >
+        voting_time = #{votingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personName != null" >
+        person_name = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="personDescription != null" >
+        person_description = #{personDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where person_id = #{personId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsVotingObject" >
+    update cms_voting_object
+    set vote_id = #{voteId,jdbcType=INTEGER},
+      voting_counts = #{votingCounts,jdbcType=INTEGER},
+      voting_sex = #{votingSex,jdbcType=INTEGER},
+      voting_pic = #{votingPic,jdbcType=VARCHAR},
+      voting_time = #{votingTime,jdbcType=TIMESTAMP},
+      person_name = #{personName,jdbcType=VARCHAR},
+      person_description = #{personDescription,jdbcType=VARCHAR}
+    where person_id = #{personId,jdbcType=INTEGER}
+  </update>
+</mapper>

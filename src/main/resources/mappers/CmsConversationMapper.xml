@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsConversationMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsConversation" >
+    <constructor >
+      <idArg column="conversation_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="interview_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="conversation_person" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="conversation_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="conversation_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    conversation_id, interview_id, conversation_person, conversation_time, conversation_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_conversation
+    where conversation_id = #{conversationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_conversation
+    where conversation_id = #{conversationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsConversation" >
+    insert into cms_conversation (conversation_id, interview_id, conversation_person, 
+      conversation_time, conversation_content
+      )
+    values (#{conversationId,jdbcType=INTEGER}, #{interviewId,jdbcType=INTEGER}, #{conversationPerson,jdbcType=VARCHAR}, 
+      #{conversationTime,jdbcType=TIMESTAMP}, #{conversationContent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsConversation" >
+    insert into cms_conversation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="conversationId != null" >
+        conversation_id,
+      </if>
+      <if test="interviewId != null" >
+        interview_id,
+      </if>
+      <if test="conversationPerson != null" >
+        conversation_person,
+      </if>
+      <if test="conversationTime != null" >
+        conversation_time,
+      </if>
+      <if test="conversationContent != null" >
+        conversation_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="conversationId != null" >
+        #{conversationId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewId != null" >
+        #{interviewId,jdbcType=INTEGER},
+      </if>
+      <if test="conversationPerson != null" >
+        #{conversationPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="conversationTime != null" >
+        #{conversationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conversationContent != null" >
+        #{conversationContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsConversation" >
+    update cms_conversation
+    <set >
+      <if test="interviewId != null" >
+        interview_id = #{interviewId,jdbcType=INTEGER},
+      </if>
+      <if test="conversationPerson != null" >
+        conversation_person = #{conversationPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="conversationTime != null" >
+        conversation_time = #{conversationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="conversationContent != null" >
+        conversation_content = #{conversationContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where conversation_id = #{conversationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsConversation" >
+    update cms_conversation
+    set interview_id = #{interviewId,jdbcType=INTEGER},
+      conversation_person = #{conversationPerson,jdbcType=VARCHAR},
+      conversation_time = #{conversationTime,jdbcType=TIMESTAMP},
+      conversation_content = #{conversationContent,jdbcType=VARCHAR}
+    where conversation_id = #{conversationId,jdbcType=INTEGER}
+  </update>
+</mapper>

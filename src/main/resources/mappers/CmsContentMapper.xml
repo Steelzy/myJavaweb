@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsContentMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsContent" >
+    <constructor >
+      <idArg column="content_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="channel_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_content_pic" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="content_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="view_times" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="content_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="con_is_static" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="origin_county" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="content_media_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    content_id, channel_id, user_id, has_content_pic, content_type, content_date, view_times, 
+    content_status, con_is_static, origin_county, content_media_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_content
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_content
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsContent" >
+    insert into cms_content (content_id, channel_id, user_id, 
+      has_content_pic, content_type, content_date, 
+      view_times, content_status, con_is_static, 
+      origin_county, content_media_type)
+    values (#{contentId,jdbcType=INTEGER}, #{channelId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{hasContentPic,jdbcType=BIT}, #{contentType,jdbcType=VARCHAR}, #{contentDate,jdbcType=DATE}, 
+      #{viewTimes,jdbcType=INTEGER}, #{contentStatus,jdbcType=INTEGER}, #{conIsStatic,jdbcType=BIT}, 
+      #{originCounty,jdbcType=INTEGER}, #{contentMediaType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsContent" >
+    insert into cms_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contentId != null" >
+        content_id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="hasContentPic != null" >
+        has_content_pic,
+      </if>
+      <if test="contentType != null" >
+        content_type,
+      </if>
+      <if test="contentDate != null" >
+        content_date,
+      </if>
+      <if test="viewTimes != null" >
+        view_times,
+      </if>
+      <if test="contentStatus != null" >
+        content_status,
+      </if>
+      <if test="conIsStatic != null" >
+        con_is_static,
+      </if>
+      <if test="originCounty != null" >
+        origin_county,
+      </if>
+      <if test="contentMediaType != null" >
+        content_media_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contentId != null" >
+        #{contentId,jdbcType=INTEGER},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="hasContentPic != null" >
+        #{hasContentPic,jdbcType=BIT},
+      </if>
+      <if test="contentType != null" >
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="contentDate != null" >
+        #{contentDate,jdbcType=DATE},
+      </if>
+      <if test="viewTimes != null" >
+        #{viewTimes,jdbcType=INTEGER},
+      </if>
+      <if test="contentStatus != null" >
+        #{contentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="conIsStatic != null" >
+        #{conIsStatic,jdbcType=BIT},
+      </if>
+      <if test="originCounty != null" >
+        #{originCounty,jdbcType=INTEGER},
+      </if>
+      <if test="contentMediaType != null" >
+        #{contentMediaType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsContent" >
+    update cms_content
+    <set >
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="hasContentPic != null" >
+        has_content_pic = #{hasContentPic,jdbcType=BIT},
+      </if>
+      <if test="contentType != null" >
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="contentDate != null" >
+        content_date = #{contentDate,jdbcType=DATE},
+      </if>
+      <if test="viewTimes != null" >
+        view_times = #{viewTimes,jdbcType=INTEGER},
+      </if>
+      <if test="contentStatus != null" >
+        content_status = #{contentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="conIsStatic != null" >
+        con_is_static = #{conIsStatic,jdbcType=BIT},
+      </if>
+      <if test="originCounty != null" >
+        origin_county = #{originCounty,jdbcType=INTEGER},
+      </if>
+      <if test="contentMediaType != null" >
+        content_media_type = #{contentMediaType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsContent" >
+    update cms_content
+    set channel_id = #{channelId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      has_content_pic = #{hasContentPic,jdbcType=BIT},
+      content_type = #{contentType,jdbcType=VARCHAR},
+      content_date = #{contentDate,jdbcType=DATE},
+      view_times = #{viewTimes,jdbcType=INTEGER},
+      content_status = #{contentStatus,jdbcType=INTEGER},
+      con_is_static = #{conIsStatic,jdbcType=BIT},
+      origin_county = #{originCounty,jdbcType=INTEGER},
+      content_media_type = #{contentMediaType,jdbcType=INTEGER}
+    where content_id = #{contentId,jdbcType=INTEGER}
+  </update>
+</mapper>

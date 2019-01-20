@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>西华师大学物联网CMS---登陆</title>
+    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css"
+          th:href="@{/static/assets/css/bootstrap.min.css}">
+    <script src="../static/assets/js/jquery-1.11.3.min.js"
+            th:src="@{/static/assets/js/jquery-1.11.3.min.js}"></script>
+    <script src="../static/assets/js/bootstrap.min.js"
+            th:src="@{/static/assets/js/bootstrap.min.js}"></script>
+<style type="text/css">
+    .xh-row{
+        width: 28%;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .xh-btn{
+        float: right;
+        margin-right: 5px;
+    }
+    .xh-red{
+        color:red;
+    }
+</style>
+</head>
+<body>
+<div>
+    <form action="/index/login" method="post" th:id="${#httpServletRequest.getContextPath()}">
+        <div class="input-group xh-row">
+            <span class="input-group-addon">用户名：</span>
+            <input type="text" class="form-control" name="username"
+                   value="admin">
+            <span class="input-group-addon xh-red">*</span>
+        </div>
+        <div class="input-group xh-row">
+            <span class="input-group-addon">密&nbsp&nbsp&nbsp&nbsp码：</span>
+            <input type="password" class="form-control" name="password" >
+            <span class="input-group-addon xh-red">*</span>
+        </div>
+
+        <div class="xh-row">
+            <button type="submit" class="btn btn-primary xh-btn">登 陆</button>
+            <button type="button" class="btn btn-primary xh-btn" th:onclick="goRegister()">注 册</button>
+            <button type="button" class="btn btn-warning xh-btn">注 销</button>
+        </div>
+
+    </form>
+
+    <form>
+
+    </form>
+
+</div>
+
+<script type="text/javascript">
+    //页面跳转问题，有几种方式
+    //1、页面间直接跳转，直接采取脚本实现，这是html window.location.href="http://localhost:8080/templates/index.html"
+    //2、从后台进行跳转，
+    //2、 1  window.location.href=""; 2  ajax
+    //3、3 本页面进行跳转，定位问题
+
+    var goRegister = function () {
+        window.location.href = "/user/registerLink"
+    }
+
+
+
+</script>
+</body>
+</html>

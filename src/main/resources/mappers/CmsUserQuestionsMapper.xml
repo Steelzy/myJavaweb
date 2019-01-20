@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsUserQuestionsMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsUserQuestions" >
+    <constructor >
+      <idArg column="question_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="interview_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="question_user" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="question_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="question_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    question_id, interview_id, question_user, question_time, question_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_user_questions
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_user_questions
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsUserQuestions" >
+    insert into cms_user_questions (question_id, interview_id, question_user, 
+      question_time, question_content)
+    values (#{questionId,jdbcType=INTEGER}, #{interviewId,jdbcType=INTEGER}, #{questionUser,jdbcType=VARCHAR}, 
+      #{questionTime,jdbcType=TIMESTAMP}, #{questionContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsUserQuestions" >
+    insert into cms_user_questions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="interviewId != null" >
+        interview_id,
+      </if>
+      <if test="questionUser != null" >
+        question_user,
+      </if>
+      <if test="questionTime != null" >
+        question_time,
+      </if>
+      <if test="questionContent != null" >
+        question_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewId != null" >
+        #{interviewId,jdbcType=INTEGER},
+      </if>
+      <if test="questionUser != null" >
+        #{questionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null" >
+        #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionContent != null" >
+        #{questionContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsUserQuestions" >
+    update cms_user_questions
+    <set >
+      <if test="interviewId != null" >
+        interview_id = #{interviewId,jdbcType=INTEGER},
+      </if>
+      <if test="questionUser != null" >
+        question_user = #{questionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="questionTime != null" >
+        question_time = #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionContent != null" >
+        question_content = #{questionContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsUserQuestions" >
+    update cms_user_questions
+    set interview_id = #{interviewId,jdbcType=INTEGER},
+      question_user = #{questionUser,jdbcType=VARCHAR},
+      question_time = #{questionTime,jdbcType=TIMESTAMP},
+      question_content = #{questionContent,jdbcType=VARCHAR}
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+</mapper>

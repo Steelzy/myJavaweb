@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsChannel" >
+    <constructor >
+      <idArg column="channel_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="channel_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="channel_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_display" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="channel_sort" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="channel_description" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="channel_remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    channel_id, parent_id, channel_name, channel_sn, is_display, channel_sort, channel_description, 
+    channel_remark, url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_channel
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_channel
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsChannel" >
+    insert into cms_channel (channel_id, parent_id, channel_name, 
+      channel_sn, is_display, channel_sort, 
+      channel_description, channel_remark, url
+      )
+    values (#{channelId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{channelName,jdbcType=VARCHAR}, 
+      #{channelSn,jdbcType=VARCHAR}, #{isDisplay,jdbcType=BIT}, #{channelSort,jdbcType=INTEGER}, 
+      #{channelDescription,jdbcType=VARCHAR}, #{channelRemark,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsChannel" >
+    insert into cms_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="channelName != null" >
+        channel_name,
+      </if>
+      <if test="channelSn != null" >
+        channel_sn,
+      </if>
+      <if test="isDisplay != null" >
+        is_display,
+      </if>
+      <if test="channelSort != null" >
+        channel_sort,
+      </if>
+      <if test="channelDescription != null" >
+        channel_description,
+      </if>
+      <if test="channelRemark != null" >
+        channel_remark,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="channelId != null" >
+        #{channelId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="channelName != null" >
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSn != null" >
+        #{channelSn,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="channelSort != null" >
+        #{channelSort,jdbcType=INTEGER},
+      </if>
+      <if test="channelDescription != null" >
+        #{channelDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="channelRemark != null" >
+        #{channelRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsChannel" >
+    update cms_channel
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="channelName != null" >
+        channel_name = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSn != null" >
+        channel_sn = #{channelSn,jdbcType=VARCHAR},
+      </if>
+      <if test="isDisplay != null" >
+        is_display = #{isDisplay,jdbcType=BIT},
+      </if>
+      <if test="channelSort != null" >
+        channel_sort = #{channelSort,jdbcType=INTEGER},
+      </if>
+      <if test="channelDescription != null" >
+        channel_description = #{channelDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="channelRemark != null" >
+        channel_remark = #{channelRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsChannel" >
+    update cms_channel
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      channel_name = #{channelName,jdbcType=VARCHAR},
+      channel_sn = #{channelSn,jdbcType=VARCHAR},
+      is_display = #{isDisplay,jdbcType=BIT},
+      channel_sort = #{channelSort,jdbcType=INTEGER},
+      channel_description = #{channelDescription,jdbcType=VARCHAR},
+      channel_remark = #{channelRemark,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where channel_id = #{channelId,jdbcType=INTEGER}
+  </update>
+</mapper>

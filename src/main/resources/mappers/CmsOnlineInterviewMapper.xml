@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsOnlineInterviewMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsOnlineInterview" >
+    <constructor >
+      <idArg column="interview_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="interview_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_info" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_title_img" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_video" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="interview_emcee" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_guest" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    interview_id, interview_title, interview_info, interview_title_img, interview_video, 
+    interview_time, interview_emcee, interview_guest, interview_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_online_interview
+    where interview_id = #{interviewId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_online_interview
+    where interview_id = #{interviewId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsOnlineInterview" >
+    insert into cms_online_interview (interview_id, interview_title, interview_info, 
+      interview_title_img, interview_video, interview_time, 
+      interview_emcee, interview_guest, interview_state
+      )
+    values (#{interviewId,jdbcType=INTEGER}, #{interviewTitle,jdbcType=VARCHAR}, #{interviewInfo,jdbcType=VARCHAR}, 
+      #{interviewTitleImg,jdbcType=VARCHAR}, #{interviewVideo,jdbcType=VARCHAR}, #{interviewTime,jdbcType=TIMESTAMP}, 
+      #{interviewEmcee,jdbcType=VARCHAR}, #{interviewGuest,jdbcType=VARCHAR}, #{interviewState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsOnlineInterview" >
+    insert into cms_online_interview
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="interviewId != null" >
+        interview_id,
+      </if>
+      <if test="interviewTitle != null" >
+        interview_title,
+      </if>
+      <if test="interviewInfo != null" >
+        interview_info,
+      </if>
+      <if test="interviewTitleImg != null" >
+        interview_title_img,
+      </if>
+      <if test="interviewVideo != null" >
+        interview_video,
+      </if>
+      <if test="interviewTime != null" >
+        interview_time,
+      </if>
+      <if test="interviewEmcee != null" >
+        interview_emcee,
+      </if>
+      <if test="interviewGuest != null" >
+        interview_guest,
+      </if>
+      <if test="interviewState != null" >
+        interview_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="interviewId != null" >
+        #{interviewId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewTitle != null" >
+        #{interviewTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewInfo != null" >
+        #{interviewInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewTitleImg != null" >
+        #{interviewTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewVideo != null" >
+        #{interviewVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewTime != null" >
+        #{interviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interviewEmcee != null" >
+        #{interviewEmcee,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewGuest != null" >
+        #{interviewGuest,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewState != null" >
+        #{interviewState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsOnlineInterview" >
+    update cms_online_interview
+    <set >
+      <if test="interviewTitle != null" >
+        interview_title = #{interviewTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewInfo != null" >
+        interview_info = #{interviewInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewTitleImg != null" >
+        interview_title_img = #{interviewTitleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewVideo != null" >
+        interview_video = #{interviewVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewTime != null" >
+        interview_time = #{interviewTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interviewEmcee != null" >
+        interview_emcee = #{interviewEmcee,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewGuest != null" >
+        interview_guest = #{interviewGuest,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewState != null" >
+        interview_state = #{interviewState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where interview_id = #{interviewId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsOnlineInterview" >
+    update cms_online_interview
+    set interview_title = #{interviewTitle,jdbcType=VARCHAR},
+      interview_info = #{interviewInfo,jdbcType=VARCHAR},
+      interview_title_img = #{interviewTitleImg,jdbcType=VARCHAR},
+      interview_video = #{interviewVideo,jdbcType=VARCHAR},
+      interview_time = #{interviewTime,jdbcType=TIMESTAMP},
+      interview_emcee = #{interviewEmcee,jdbcType=VARCHAR},
+      interview_guest = #{interviewGuest,jdbcType=VARCHAR},
+      interview_state = #{interviewState,jdbcType=INTEGER}
+    where interview_id = #{interviewId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsContentExtMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsContentExt" >
+    <constructor >
+      <idArg column="content_ext_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="content_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_sn" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_blod" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="title_color" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_author" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_origin" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_static_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_video_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content_media_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="has_content_attach" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="attach_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    content_ext_id, content_title, content_sn, is_blod, title_color, content_pic_url, 
+    content_author, content_origin, content_static_url, content_video_url, content_media_url, 
+    has_content_attach, attach_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_content_ext
+    where content_ext_id = #{contentExtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_content_ext
+    where content_ext_id = #{contentExtId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsContentExt" >
+    insert into cms_content_ext (content_ext_id, content_title, content_sn, 
+      is_blod, title_color, content_pic_url, 
+      content_author, content_origin, content_static_url, 
+      content_video_url, content_media_url, has_content_attach, 
+      attach_url)
+    values (#{contentExtId,jdbcType=INTEGER}, #{contentTitle,jdbcType=VARCHAR}, #{contentSn,jdbcType=VARCHAR}, 
+      #{isBlod,jdbcType=BIT}, #{titleColor,jdbcType=VARCHAR}, #{contentPicUrl,jdbcType=VARCHAR}, 
+      #{contentAuthor,jdbcType=VARCHAR}, #{contentOrigin,jdbcType=VARCHAR}, #{contentStaticUrl,jdbcType=VARCHAR}, 
+      #{contentVideoUrl,jdbcType=VARCHAR}, #{contentMediaUrl,jdbcType=VARCHAR}, #{hasContentAttach,jdbcType=BIT}, 
+      #{attachUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsContentExt" >
+    insert into cms_content_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="contentExtId != null" >
+        content_ext_id,
+      </if>
+      <if test="contentTitle != null" >
+        content_title,
+      </if>
+      <if test="contentSn != null" >
+        content_sn,
+      </if>
+      <if test="isBlod != null" >
+        is_blod,
+      </if>
+      <if test="titleColor != null" >
+        title_color,
+      </if>
+      <if test="contentPicUrl != null" >
+        content_pic_url,
+      </if>
+      <if test="contentAuthor != null" >
+        content_author,
+      </if>
+      <if test="contentOrigin != null" >
+        content_origin,
+      </if>
+      <if test="contentStaticUrl != null" >
+        content_static_url,
+      </if>
+      <if test="contentVideoUrl != null" >
+        content_video_url,
+      </if>
+      <if test="contentMediaUrl != null" >
+        content_media_url,
+      </if>
+      <if test="hasContentAttach != null" >
+        has_content_attach,
+      </if>
+      <if test="attachUrl != null" >
+        attach_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="contentExtId != null" >
+        #{contentExtId,jdbcType=INTEGER},
+      </if>
+      <if test="contentTitle != null" >
+        #{contentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="contentSn != null" >
+        #{contentSn,jdbcType=VARCHAR},
+      </if>
+      <if test="isBlod != null" >
+        #{isBlod,jdbcType=BIT},
+      </if>
+      <if test="titleColor != null" >
+        #{titleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPicUrl != null" >
+        #{contentPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentAuthor != null" >
+        #{contentAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="contentOrigin != null" >
+        #{contentOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="contentStaticUrl != null" >
+        #{contentStaticUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentVideoUrl != null" >
+        #{contentVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentMediaUrl != null" >
+        #{contentMediaUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hasContentAttach != null" >
+        #{hasContentAttach,jdbcType=BIT},
+      </if>
+      <if test="attachUrl != null" >
+        #{attachUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsContentExt" >
+    update cms_content_ext
+    <set >
+      <if test="contentTitle != null" >
+        content_title = #{contentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="contentSn != null" >
+        content_sn = #{contentSn,jdbcType=VARCHAR},
+      </if>
+      <if test="isBlod != null" >
+        is_blod = #{isBlod,jdbcType=BIT},
+      </if>
+      <if test="titleColor != null" >
+        title_color = #{titleColor,jdbcType=VARCHAR},
+      </if>
+      <if test="contentPicUrl != null" >
+        content_pic_url = #{contentPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentAuthor != null" >
+        content_author = #{contentAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="contentOrigin != null" >
+        content_origin = #{contentOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="contentStaticUrl != null" >
+        content_static_url = #{contentStaticUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentVideoUrl != null" >
+        content_video_url = #{contentVideoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentMediaUrl != null" >
+        content_media_url = #{contentMediaUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hasContentAttach != null" >
+        has_content_attach = #{hasContentAttach,jdbcType=BIT},
+      </if>
+      <if test="attachUrl != null" >
+        attach_url = #{attachUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where content_ext_id = #{contentExtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsContentExt" >
+    update cms_content_ext
+    set content_title = #{contentTitle,jdbcType=VARCHAR},
+      content_sn = #{contentSn,jdbcType=VARCHAR},
+      is_blod = #{isBlod,jdbcType=BIT},
+      title_color = #{titleColor,jdbcType=VARCHAR},
+      content_pic_url = #{contentPicUrl,jdbcType=VARCHAR},
+      content_author = #{contentAuthor,jdbcType=VARCHAR},
+      content_origin = #{contentOrigin,jdbcType=VARCHAR},
+      content_static_url = #{contentStaticUrl,jdbcType=VARCHAR},
+      content_video_url = #{contentVideoUrl,jdbcType=VARCHAR},
+      content_media_url = #{contentMediaUrl,jdbcType=VARCHAR},
+      has_content_attach = #{hasContentAttach,jdbcType=BIT},
+      attach_url = #{attachUrl,jdbcType=VARCHAR}
+    where content_ext_id = #{contentExtId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsModule" >
+    <constructor >
+      <idArg column="module_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="module_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="priority" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="module_descript" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    module_id, module_name, short_name, url, priority, parent_id, module_descript
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_module
+    where module_id = #{moduleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_module
+    where module_id = #{moduleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsModule" >
+    insert into cms_module (module_id, module_name, short_name, 
+      url, priority, parent_id, 
+      module_descript)
+    values (#{moduleId,jdbcType=INTEGER}, #{moduleName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{moduleDescript,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsModule" >
+    insert into cms_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moduleId != null" >
+        module_id,
+      </if>
+      <if test="moduleName != null" >
+        module_name,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="moduleDescript != null" >
+        module_descript,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleName != null" >
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleDescript != null" >
+        #{moduleDescript,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsModule" >
+    update cms_module
+    <set >
+      <if test="moduleName != null" >
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="moduleDescript != null" >
+        module_descript = #{moduleDescript,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where module_id = #{moduleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsModule" >
+    update cms_module
+    set module_name = #{moduleName,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      module_descript = #{moduleDescript,jdbcType=VARCHAR}
+    where module_id = #{moduleId,jdbcType=INTEGER}
+  </update>
+</mapper>

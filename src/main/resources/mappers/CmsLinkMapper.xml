@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsLinkMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsLink" >
+    <constructor >
+      <idArg column="link_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="link_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="link_short" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="link_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="link_remark" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    link_id as linkId, link_name as linkName, link_short as linkShort, link_address as linkAddress, link_remark as linkRemark
+  </sql>
+
+  <select id="selectAll" resultType="CmsLink">
+    select
+    <include refid="Base_Column_List" />
+    from cms_link
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_link
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_link
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsLink" >
+    insert into cms_link (link_id, link_name, link_short, 
+      link_address, link_remark)
+    values (#{linkId,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR}, #{linkShort,jdbcType=INTEGER}, 
+      #{linkAddress,jdbcType=VARCHAR}, #{linkRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsLink" >
+    insert into cms_link
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkId != null" >
+        link_id,
+      </if>
+      <if test="linkName != null" >
+        link_name,
+      </if>
+      <if test="linkShort != null" >
+        link_short,
+      </if>
+      <if test="linkAddress != null" >
+        link_address,
+      </if>
+      <if test="linkRemark != null" >
+        link_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkId != null" >
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkShort != null" >
+        #{linkShort,jdbcType=INTEGER},
+      </if>
+      <if test="linkAddress != null" >
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="linkRemark != null" >
+        #{linkRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsLink" >
+    update cms_link
+    <set >
+      <if test="linkName != null" >
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkShort != null" >
+        link_short = #{linkShort,jdbcType=INTEGER},
+      </if>
+      <if test="linkAddress != null" >
+        link_address = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="linkRemark != null" >
+        link_remark = #{linkRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsLink" >
+    update cms_link
+    set link_name = #{linkName,jdbcType=VARCHAR},
+      link_short = #{linkShort,jdbcType=INTEGER},
+      link_address = #{linkAddress,jdbcType=VARCHAR},
+      link_remark = #{linkRemark,jdbcType=VARCHAR}
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+</mapper>

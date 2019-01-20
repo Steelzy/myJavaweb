@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springboot.cms.mapper.CmsEasyQueryMapper" >
+  <resultMap id="BaseResultMap" type="com.springboot.cms.entity.CmsEasyQuery" >
+    <constructor >
+      <idArg column="easy_query_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="easy_query_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="easy_query_link" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    easy_query_id, easy_query_title, easy_query_link
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cms_easy_query
+    where easy_query_id = #{easyQueryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cms_easy_query
+    where easy_query_id = #{easyQueryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.springboot.cms.entity.CmsEasyQuery" >
+    insert into cms_easy_query (easy_query_id, easy_query_title, easy_query_link
+      )
+    values (#{easyQueryId,jdbcType=INTEGER}, #{easyQueryTitle,jdbcType=VARCHAR}, #{easyQueryLink,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.springboot.cms.entity.CmsEasyQuery" >
+    insert into cms_easy_query
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="easyQueryId != null" >
+        easy_query_id,
+      </if>
+      <if test="easyQueryTitle != null" >
+        easy_query_title,
+      </if>
+      <if test="easyQueryLink != null" >
+        easy_query_link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="easyQueryId != null" >
+        #{easyQueryId,jdbcType=INTEGER},
+      </if>
+      <if test="easyQueryTitle != null" >
+        #{easyQueryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="easyQueryLink != null" >
+        #{easyQueryLink,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.cms.entity.CmsEasyQuery" >
+    update cms_easy_query
+    <set >
+      <if test="easyQueryTitle != null" >
+        easy_query_title = #{easyQueryTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="easyQueryLink != null" >
+        easy_query_link = #{easyQueryLink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where easy_query_id = #{easyQueryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.cms.entity.CmsEasyQuery" >
+    update cms_easy_query
+    set easy_query_title = #{easyQueryTitle,jdbcType=VARCHAR},
+      easy_query_link = #{easyQueryLink,jdbcType=VARCHAR}
+    where easy_query_id = #{easyQueryId,jdbcType=INTEGER}
+  </update>
+</mapper>
